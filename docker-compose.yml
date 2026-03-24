@@ -16,9 +16,11 @@ services:
       - todo-network
     ports:
       - "8080:8080"
-    depends_on:
-      - todo-db
     restart: unless-stopped
+    depends_on:
+      todo-db:
+        condition: service_healthy
+
 
   todo-db:
     image: mysql:latest
@@ -34,6 +36,11 @@ services:
       - MYSQL_PASSWORD=1234
     volumes:
       - todo-volume:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p1234"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   todo-volume:
