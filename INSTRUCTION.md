@@ -12,7 +12,7 @@ docker compose up -d
 
 ## Accessing the app
 
-To open the app follow the [link](http:///localhost:8080)
+To open the app follow the [link](http://localhost:8080)
 
 ## Stopping the app
 
